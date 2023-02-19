@@ -67,7 +67,9 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
-        run:
+
+      - name: Testing Login
+        run: |
           gcloud artifacts repositories list 
 
       # - name: Configure Docker Client
