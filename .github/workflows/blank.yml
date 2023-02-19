@@ -46,17 +46,17 @@ jobs:
       #       -Dsonar.projectKey=${{ env.sonar_cloud_proj }}
       #       -Dsonar.verbose=true
 
-      - name: Build the docker Image
-        working-directory: ${{ env.app_name }}
-        run: |
-          docker build -t ${{ env.app_name }}:${{ env.app_version }} .
+      # - name: Build the docker Image
+      #   working-directory: ${{ env.app_name }}
+      #   run: |
+      #     docker build -t ${{ env.app_name }}:${{ env.app_version }} .
       
-      - name: Tag the docker image
-        working-directory: ${{ env.app_name }}
-        run: | 
-          docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.gcp_repo_name }}/${{ env.app_name }}:${{ env.tag_new_version }}
-          echo "Docker images list: "
-          docker images
+      # - name: Tag the docker image
+      #   working-directory: ${{ env.app_name }}
+      #   run: | 
+      #     docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.gcp_repo_name }}/${{ env.app_name }}:${{ env.tag_new_version }}
+      #     echo "Docker images list: "
+      #     docker images
 
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
@@ -67,12 +67,14 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
+        run:
+          gcloud artifacts repositories list 
 
-      - name: Configure Docker Client
-        run: |-
-            gcloud auth configure-docker ${{ env.repo_region }}-docker.pkg.dev
+      # - name: Configure Docker Client
+      #   run: |-
+      #       gcloud auth configure-docker ${{ env.repo_region }}-docker.pkg.dev
 
-      - name: Push Docker image to Artifact Registry
-        working-directory: ${{ env.app_name }}
-        run: |-
-          docker push  ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.gcp_repo_name }}/${{ env.app_name }}:${{ env.tag_new_version }}
+      # - name: Push Docker image to Artifact Registry
+      #   working-directory: ${{ env.app_name }}
+      #   run: |-
+      #     docker push  ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.gcp_repo_name }}/${{ env.app_name }}:${{ env.tag_new_version }}
