@@ -1,13 +1,13 @@
 # Declaring env's
 env:
   repo:             "https://github.com/bitnami/containers.git" # Add the URL for the desired GitHub Repository to build and push
-  app_version:      "latest" # Add desired app version
+  app_version:      "APP" # Add desired app version
   repo_region:      "us-central1" # Specify Google Artifact Region
-  app_name:         "dokuwiki" # Will be used as working directory must corresponed to the cloned repository name
+  app_name:         "bitnami" # Will be used as working directory must corresponed to the cloned repository name
   tag_new_version:  ${GITHUB_SHA} # GitHub Variable storing commit's message
   enable_sonar:     false # True for repo code scanning
   project_id:       "terraform-project-feruza" #Enter GCP project ID
-  gcp_repo_name:    "docker-image" # Google Artifact repository name
+  gcp_repo_name:    "bitnami-app" # Google Artifact repository name
   sonar_cloud_org:  "redash-6" # Add SonarCloud Organization name
   sonar_cloud_proj: "redash-6_redash" # Add SonaCloud Project name
 
@@ -45,6 +45,9 @@ jobs:
       #       -Dsonar.organization=${{ env.sonar_cloud_org }}
       #       -Dsonar.projectKey=${{ env.sonar_cloud_proj }}
       #       -Dsonar.verbose=true
+      - name: change directory
+        run: |
+          cd bitnami/APP/VERSION/OPERATING-SYSTEM
 
       - name: Build the docker Image
         working-directory: ${{ env.app_name }}
