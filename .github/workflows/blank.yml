@@ -47,7 +47,7 @@ jobs:
       #       -Dsonar.verbose=true
       - name: change directory
         run: |
-          ls
+          pwd
           
 
       - name: Build the docker Image
