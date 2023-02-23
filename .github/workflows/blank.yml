@@ -47,7 +47,8 @@ jobs:
       #       -Dsonar.verbose=true
       - name: change directory
         run: |
-          cd containers/bitnami/appsmith/1/debian-11/
+          ls
+          
 
       - name: Build the docker Image
         working-directory: ${{ env.app_name }}
