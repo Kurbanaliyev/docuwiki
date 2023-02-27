@@ -6,7 +6,7 @@ env:
   app_name:         "bitnami" # Will be used as working directory must corresponed to the cloned repository name
   tag_new_version:  ${GITHUB_SHA} # GitHub Variable storing commit's message
   enable_sonar:     false # True for repo code scanning
-  project_id:       "terraform-project-feruza" #Enter GCP project ID
+  project_id:       "terraform-project-Kurbanaliyev" #Enter GCP project ID
   gcp_repo_name:    "bitnami-app" # Google Artifact repository name
   sonar_cloud_org:  "redash-6" # Add SonarCloud Organization name
   sonar_cloud_proj: "redash-6_redash" # Add SonaCloud Project name
